@@ -13,13 +13,13 @@ public class ApplicationConfig {
         return new MyFirstClass("First Bean");
     }
 
-    @Bean()
+    @Bean
     public MyFirstClass mySecondBean(){
         return new MyFirstClass("Second Bean");
     }
 
-    @Bean()
-    @Primary
+    @Bean
+   // @Primary
     public MyFirstClass myThirdBean(){
         return new MyFirstClass("Third Bean");
     }

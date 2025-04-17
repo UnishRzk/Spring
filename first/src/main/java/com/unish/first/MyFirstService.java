@@ -1,6 +1,7 @@
 package com.unish.first;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -8,12 +9,9 @@ import org.springframework.stereotype.Service;
 
 public class MyFirstService {
 
-    private final MyFirstClass myFirstClass;
-
-    public MyFirstService(MyFirstClass myFirstClass) {
-
-        this.myFirstClass = myFirstClass;
-    }
+    @Autowired
+    @Qualifier("mySecondBean")
+    private MyFirstClass myFirstClass;
 
 
     public String saySomething(){
