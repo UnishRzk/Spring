@@ -3,45 +3,47 @@ package com.unish.first;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 @Service
-
+@PropertySources(
+        {
+                @PropertySource("classpath:custom.properties"),
+                @PropertySource("classpath:customFileProper.properties")
+        }
+)
 public class MyFirstService {
 
 
-    private MyFirstClass myFirstClass;
-    private Environment environment;
+    private final MyFirstClass myFirstClass;
 
-    @Autowired
-    public void setMyFirstClass(
-            @Qualifier("mySecondBean") MyFirstClass myFirstClass
-    ){
+    @Value("${my.prop}")
+    private String customPropertyFromAnotherFile;
+
+    @Value("${my.prop.2}")
+    private String customPropertyFromAnotherFile2;
+
+    public MyFirstService(
+           @Qualifier("bean1") MyFirstClass myFirstClass){
         this.myFirstClass = myFirstClass;
     }
+
 
     public String saySomething(){
 
         return "the dependency is saying: "+myFirstClass.sayHello();
     }
 
-    public String getJavaVersion(){
-        return environment.getProperty("java.version");
+
+    public String getCustomPropertyFromAnotherFile() {
+        return customPropertyFromAnotherFile;
     }
 
-    public String getOsname(){
-        return environment.getProperty("os.name");
+    public String getCustomPropertyFromAnotherFile2() {
+        return customPropertyFromAnotherFile2;
     }
-
-    public String readProperty(){
-        return environment.getProperty("my.custom.property");
-    }
-
-    @Autowired
-    public void setEnvironment(Environment environment) {
-        this.environment = environment;
-    }
-
-
 }
