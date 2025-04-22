@@ -1,4 +1,4 @@
-package com.unish.simpleWebApp;
+package com.unish.simpleWebApp.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +8,6 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String login(){
-        return "login Page";
+        return "LOgin page";
     }
 }
